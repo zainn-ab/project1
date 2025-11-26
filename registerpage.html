@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student</title>
+    <style>
+      body{
+        background-color: white;
+      }
+      .head {
+          display: flex;
+          align-items: center;    /* vertically aligns image + text */
+          gap: 10px; 
+          border-bottom:1px solid #e5e7eb;
+                   /* space between image and text */
+        }
+      .user-logo1{
+            width:50px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+      .form{
+        display: flex;
+      }
+      .form-group {
+    display: flex;
+    flex-direction: column;
+    
+}
+.student-form{
+    align-items: center;
+}
+.submit-button {
+    width: 100%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+
+}
+.form-group label {
+    display: flex;
+    align-items: center;
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s;
+    align-items: center;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+    </style>
+</head>
+<body>
+    <div class="head">
+       <img src="userlogo.jpeg.jpeg" class="user-logo1">
+       <h2 style="color: rgb(15, 42, 84);">Register New Students</h2>
+
+    </div> <br>
+    <div class="form">
+        <form id="registerForm" class="student-form">
+                    <!-- Student Name -->
+                    <div class="form-group">
+                        <label for="name">
+                            <img src="userlogo3.jpeg.jpeg" style="width: 20px;">
+                            Student Name
+                        </label>
+                        <input type="text" id="name" name="name" required placeholder="Enter student's full name">
+                    </div>
+
+                    <!-- Room Number -->
+                    <div class="form-group">
+                        <label for="roomNumber">
+                            <img src="homelogo2.jpeg.jpeg" style="width: 20px;">
+                            Room Number
+                        </label>
+                        <input type="text" id="roomNumber" name="roomNumber" required placeholder="e.g., 101,102">
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <label for="phoneNumber">
+                            <img src="phonelogo.jpeg.jpeg" style="width: 20px;">
+                            Phone Number
+                        </label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter student's phone number">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">
+                            <img src="msglogo.jpeg.jpeg" style="width: 20px;">
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" required placeholder="e.g.,bca150xx.23@bitmesra.ac.in">
+                    </div>
+
+                    <!-- Guardian Contact -->
+                    <div class="form-group">
+                        <label for="guardianContact">
+                            <img src="twouserlogo.jpeg.jpeg" style="width: 20px;">
+                            Guardian Contact Number
+                        </label>
+                        <input type="tel" id="guardianContact" name="guardianContact" required placeholder="Enter guardian's phone number">
+                    </div>
+                    <br>
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-button">
+                        
+                        Register Student
+                    </button>
+                </form>
+
+
+        </form>
+    </div>
+<script>
+
+document.getElementById("registerForm").addEventListener("submit", function(e){
+    e.preventDefault(); // stop page refresh
+
+    // Read input values
+    const student = {
+        name: document.getElementById("name").value,
+        roomNumber: document.getElementById("roomNumber").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+        email: document.getElementById("email").value,
+        guardianContact: document.getElementById("guardianContact").value
+    };
+
+    // Get existing students from LocalStorage or empty array
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    // Add new student
+    students.push(student);
+
+    // Save back to LocalStorage
+    localStorage.setItem("students", JSON.stringify(students));
+
+    alert("Student Registered Successfully!");
+
+    // Redirect to Registered Student Page
+    window.location.href = "studentpage.html";
+
+    console.log(students[students.length-1].name);
+});
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+        body{
+            background-color: #519ccb;
+        }
+        .head {
+          display: flex;
+          align-items: center;    /* vertically aligns image + text */
+          gap: 10px;   
+          justify-content: space-between; 
+          padding: 10px;    
+          border-bottom:1px solid #e5e7eb; 
+          box-shadow:5px white;     /* space between image and text */
+        }
+        .left-side{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .title{
+            flex: 1;
+            text-align: center;
+            margin: 0;
+        }
+        .home-logo {
+          width: 25px;            /* adjust as needed */
+        } 
+        .welcome-section {
+          text-align: center;
+          margin-bottom: 3rem;
+          color: rgb(15, 42, 84);
+        }
+        .welcome-text {
+         color:rgb(15, 42, 84);
+         max-width: 42rem;
+         margin: 0 auto;
+         font-size: 1rem;
+         align-items: center;
+        }
+        .user-logo{
+            width: 10%;
+        }
+        .action-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.action-card {
+    background: lightblue;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: left;
+    border: 2px solid #f3f4f6;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.action-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    border-color: #e0e7ff;
+}
+
+.card-icon {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    width: fit-content;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.action-card:hover .card-icon {
+    transform: scale(1.1);
+}
+.stats-section {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 45rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stat-card {
+    background: lightblue;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border: 2px solid #f3f4f6;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+    </style>
+</head>
+<body>
+   <div class="head">
+     <div class="left-side">
+         <img src="homelogo.jpg" class="home-logo">
+         <h3 style="color: yellow;">HOME</h3>
+    </div>
+      <h1 class="title" style="color:rgb(195, 56, 35);align-items: center;">Hostel Student Management System</h1>
+
+   </div>
+   <div class="welcome-section">
+             <div class="well">
+                <h2 style="color: rgb(15, 42, 84);">Welcome to the Dashboard</h2>
+             </div>
+                <p class="welcome-text">
+                    Manage hostel student registrations and monitor their in/out movements in real-time. 
+                    Select an option below to get started.
+                </p>
+    </div>
+    <div class="action-cards">
+                <!-- Register New Student Card -->
+                <button class="action-card green-card" onclick="window.location.href='registerPage.html'">
+                    <img src="userlogo.jpg" class="user-logo">
+                    <h3>Register New Student</h3>
+                    <p class="card-description">
+                        Add a new student to the hostel management system with their personal details and room assignment.
+                    </p>
+                    <div class="card-action">
+                        <span style="color: green;">Get Started</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </button>
+
+                <!-- Registered Students Card -->
+                <button class="action-card blue-card" onclick="window.location.href='studentpage.html'">
+                    <img src="twouserlogo.jpg" class="user-logo">
+                    <h3>Registered Students</h3>
+                    <p class="card-description">
+                        View all registered students, track their in/out records, and manage their movement history.
+                    </p>
+                    <div class="card-action">
+                        <span style="color:rgb(15, 42, 84);">View Students</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </button>
+    </div>
+   
+    <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-label">Total Students</div>
+                    <div class="stat-value" id="totalStudents">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Records</div>
+                    <div class="stat-value" id="totalRecords">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Currently Out</div>
+                    <div class="stat-value" id="currentlyOut">0</div>
+                </div>
+    
+    </div>
+    
+</body>
+</html>
