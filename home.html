@@ -6,7 +6,7 @@
     <title>Home page</title>
     <style>
         body{
-            background-color: white;
+            background-color: #519ccb;
         }
         .head {
           display: flex;
@@ -163,18 +163,27 @@
     <div class="stats-section">
                 <div class="stat-card">
                     <div class="stat-label">Total Students</div>
-                    <div class="stat-value" id="totalStudents">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Total Records</div>
-                    <div class="stat-value" id="totalRecords">0</div>
+                    <div class="stat-value" id="totalSt">0</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Currently Out</div>
-                    <div class="stat-value" id="currentlyOut">0</div>
+                    <div class="stat-value" id="currOut">0</div>
                 </div>
     
     </div>
-    
+    <script>
+        const students = JSON.parse(localStorage.getItem("students")) || [];
+        let value=students.length;
+        document.getElementById("totalSt").innerText=value;
+        let totalout=0;
+        students.forEach(student=>{
+           let lastthree= student.activities.slice(-3).reverse();
+            if(lastthree[0].type=="Out"){
+               totalout++;
+           }
+        });  
+        document.getElementById("currOut").innerText=totalout;
+
+    </script>
 </body>
 </html>

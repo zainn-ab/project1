@@ -1,50 +1,135 @@
+const students = JSON.parse(localStorage.getItem("students")) || [];
+const cardContainer = document.querySelector("#cardContainer");
 
-//     const students = JSON.parse(localStorage.getItem("students")) || [];
+function getFormattedTime() {
+  return new Date().toLocaleString("en-IN");
+}
 
-//     const tableBody = document.querySelector("#studentsTable tbody");
+cardContainer.innerHTML = "";
 
-//     students.forEach(student => {
-//     const row = document.createElement("tr");
-//     row.innerHTML = `
-//         <td>${student.name}</td>
-//         <td>${student.roomNumber}</td>
-//         <td>${student.phoneNumber}</td>
-//         <td>${student.email}</td>
-//         <td>${student.guardianContact}</td>
-//     `;
-//     tableBody.appendChild(row);
-// });
+students.forEach(student => {
 
+  // Each student MUST have an activity array
+  if (!student.activities) student.activities = [];
 
-    // Your list of items
+  const card = document.createElement("div");
+  card.classList.add("card");
 
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="user-info">
+        <div class="avatar">A</div>
+        <div class="user-text">
+          <div class="user-name">${student.name}</div>
+          <div class="user-meta">
+            <div class="meta-item"><span class="meta-icon">🏠</span>${student.roomNumber}</div>
+            <div class="meta-item"><span class="meta-icon">📞</span>${student.phoneNumber}</div>
+          </div>
+        </div>
+      </div>
 
+      <div class="card-actions">
+        <button class="btn-inactive btn-out" style="background-color:#519ccb">Mark Out</button>
+        <button class="btn-inactive btn-in style="background-color:gray">Mark In</button>
+      </div>
+    </div>
 
-    const students = JSON.parse(localStorage.getItem("students")) || [];
+    <div class="divider"></div>
 
-    const cardContainer = document.querySelector("#cardContainer");
+    <div class="activity-header">
+      <span class="activity-header-icon">⏱</span>
+      <span>Recent Activity</span>
+    </div>
 
-    students.forEach(student => {
-        cardContainer.innerHTML += `
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        ${student.name}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${student.roomNumber}</h5>
-                        <p class="card-text">${student.email}</p>
-                        <p class="card-text"><strong>Phone:</strong> ${student.phoneNumber}</p>
-                        <p class="card-text"><strong>Guardian:</strong> ${student.guardianContact}</p>
-                        <button style="width:100px;height:50px;background-color:green" type="submit" value="submit" >Mark Out</button>
-                        <button style="width:100px;height:50px;background-color:gray" type="submit" value="submit" >Mark In</button>
-                    </div>
-                </div>
-            </div>
-        `;
+    <div class="activity-list"></div>
+  `;
+
+  cardContainer.appendChild(card);
+
+  // Select buttons
+  const btnOut = card.querySelector(".btn-out");
+  const btnIn  = card.querySelector(".btn-in");
+
+  const activityList = card.querySelector(".activity-list");
+
+  // ----------------------------------------------------
+  // DEFAULT BUTTON STATE (student starts "IN")
+  // ----------------------------------------------------
+  if(student.activities.length == 0 || student.activities.at(-1).type == "In")
+  {
+    btnIn.disabled = true;      // Can't mark IN again
+    btnOut.disabled = false;    // Can mark OUT first
+  }
+  if(student.activities.length == 0 || student.activities.at(-1).type == "Out")
+  {
+    btnIn.disabled = false;      // Can't mark IN again
+    btnOut.disabled = true;    // Can mark OUT first
+  }
+
+  // ----------------------------------------------------
+
+  // FUNCTION TO RENDER LATEST 3 ACTIVITIES
+  function renderActivities() {
+    activityList.innerHTML = ""; // clear old items
+
+    // Get latest 3 (reverse chronological)
+    const lastThree = student.activities.slice(-3).reverse();
+
+    lastThree.forEach(act => {
+      const item = document.createElement("div");
+      item.classList.add("activity-item");
+
+      item.innerHTML = `
+        <div class="activity-icon ${act.type === 'In' ? 'in' : 'out'}">⮕</div>
+        <div class="activity-text">
+          <div class="activity-title">${act.type === "In" ? "Returned" : "Went Out"}</div>
+          <div class="activity-time">${act.time}</div>
+        </div>
+      `;
+
+      activityList.appendChild(item); // appending item div inside activity list div
+    });
+  }
+
+  // FIRST RENDER (if the student already has old data)
+  renderActivities();
+
+  // ---- MARK OUT ----
+  btnOut.addEventListener("click", () => {
+
+    // ❗ Disable OUT button & enable IN button
+    
+      btnOut.disabled = true;
+      btnIn.disabled = false;
+    student.activities.push({
+      type: "Out",
+      time: getFormattedTime()
+    });
+  
+
+    renderActivities();
+    localStorage.setItem("students", JSON.stringify(students));
+  });
+
+  // ---- MARK IN ----
+  btnIn.addEventListener("click", () => {
+
+    // ❗ Disable IN button & enable OUT button
+      btnIn.disabled = true;
+      btnOut.disabled = false;
+    student.activities.push({
+      type: "In",
+      time: getFormattedTime()
     });
 
+    renderActivities();
+    localStorage.setItem("students", JSON.stringify(students));
+  });
 
 
+});
 
-
+function reset(){
+  localStorage.clear();
+  location.reload();
+}
