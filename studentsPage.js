@@ -60,11 +60,7 @@ students.forEach(student => {
     btnIn.disabled = true;      // Can't mark IN again
     btnOut.disabled = false;    // Can mark OUT first
   }
-  if(student.activities.length == 0 || student.activities.at(-1).type == "Out")
-  {
-    btnIn.disabled = false;      // Can't mark IN again
-    btnOut.disabled = true;    // Can mark OUT first
-  }
+  
 
   // ----------------------------------------------------
 
