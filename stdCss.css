@@ -29,7 +29,24 @@
       justify-content: space-between;
       flex-wrap: wrap;
       margin-bottom: 16px;
+      border-radius: 300px;
     }
+
+.searchbar{
+      display: flex;
+      border-radius: 15px;
+      width:25%;
+      background-image: url(searchicon.jpeg);
+      background-repeat: no-repeat;
+      justify-content: space-between;
+      align-items: center;
+      background-size: contain;
+      background-position: right;
+}
+
+.search{
+      margin-top: 10px;
+}
 
     .user-info {
       display: flex;

@@ -114,6 +114,17 @@
                         <input type="text" id="name" name="name" required placeholder="Enter student's full name">
                     </div>
 
+                    <!-- Roll number -->
+                    <div class="form-group">
+                        <label for="roll" style="color: black;font-weight: bold;">
+                            <img src="badge.jpeg" style="width: 20px;">
+                             STUDENT'S ROLL NUMBER
+                        </label>
+                        <input type="text" id="roll" name="roll" required placeholder="Enter student's roll number">
+                    </div>
+
+
+
                     <!-- Room Number -->
                     <div class="form-group">
                         <label for="roomNumber">
@@ -170,6 +181,7 @@
     let t = now.toLocaleTimeString();
     let student = {
         name: document.getElementById("name").value,
+        rollNumber: document.getElementById("roll").value,
         roomNumber: document.getElementById("roomNumber").value,
         phoneNumber: document.getElementById("phoneNumber").value,
         email: document.getElementById("email").value,

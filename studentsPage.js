@@ -15,6 +15,7 @@ students.forEach(student => {
   const card = document.createElement("div");
   card.classList.add("card");
 
+  card.dataset.roll=String(student.rollNumber || "").toLowerCase()
   card.innerHTML = `
     <div class="card-header">
       <div class="user-info">
@@ -24,6 +25,9 @@ students.forEach(student => {
           <div class="user-meta">
             <div class="meta-item"><span class="meta-icon">🏠</span>${student.roomNumber}</div>
             <div class="meta-item"><span class="meta-icon">📞</span>${student.phoneNumber}</div>
+
+            <div class="meta-item"><img src="usericon.jpeg" style="width:20px"><span class="roll-number">${student.rollNumber}</span></div>
+
           </div>
         </div>
       </div>
@@ -128,4 +132,17 @@ students.forEach(student => {
 function reset(){
   localStorage.clear();
   location.reload();
+}
+
+function searchItems(){
+  const input=(document.getElementById("search")?.value || "").trim().toLowerCase();
+  const cards=document.querySelectorAll("#cardContainer .card");
+  cards.forEach(card=>{
+     const roll= card.dataset.roll || "";
+     if(!input || roll.includes(input)){
+       card.style.display="";
+      }else{
+        card.style.display="none";
+      }
+  });
 }
