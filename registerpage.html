@@ -7,13 +7,18 @@
     <style>
       body{
         background-color: #519ccb;
+        background-image: url("back.jpeg");
+        background-repeat: no-repeat;
+       
+
       }
       .head {
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;    /* vertically aligns image + text */
           gap: 20px; 
           border-bottom:1px solid #e5e7eb;
+          padding: 10px;
                    /* space between image and text */
         }
       .user-logo1{
@@ -22,24 +27,38 @@
             gap: 10px;
             align-items: center;
         }
+        .left-side{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+          .home-logo {
+          width: 25px;            /* adjust as needed */
+        } 
       .form{
         display: flex;
         padding: 10px;
         margin: 20px;
-        
+        border-color: white;
+        border-width: 10%;
+        width: 35%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        justify-content: center;
+        backdrop-filter: blur(12px);
+        border-width: 2px;
       }
       .form-group {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px;
-    padding: 3px;
-    flex-direction: column;
-    
-}
-.student-form{
-    align-items: center;
-}
-.submit-button {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px;
+      padding: 3px;
+      flex-direction: column;
+      }
+     .student-form{
+       justify-content: left;
+     }
+    .submit-button {
     width: 100%;
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
@@ -55,23 +74,20 @@
     gap: 0.5rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
-
-}
-.form-group label {
+    }
+   .form-group label {
     display: flex;
     align-items: center;
     color: #374151;
     font-weight: 500;
     margin-bottom: 0.5rem;
     align-items: center;
-}
-.formdiv{
+    }
+    .formdiv{
     display: flex;
     justify-content: center;
-}
-
-
-.form-group input {
+     }
+   .form-group input {
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
@@ -79,18 +95,12 @@
     font-size: 1rem;
     transition: all 0.3s;
     align-items: center;
-}
-
-.form-group input:focus {
+   }
+  .form-group input:focus {
     outline: none;
     border-color: #10b981;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-}
-
-.student-form{
-    align-items: center;
-
-}
+   }
 
 
     </style>
@@ -98,111 +108,98 @@
 <body>
     <div class="head">
        <img src="userlogo.jpg" class="user-logo1">
-       <h2 style="color: rgb(15, 42, 84);">Register New Students</h2>
-
+    
+       <h2 style="color:cyan">Register New Students</h2>
+       <div class="left-side">
+         <img src="homelogo.jpg" class="home-logo">
+         <a href="index.html">
+         <h3 style="color: yellow;">HOME</h3></a>
+       </div>
     </div> <br>
     <div class="formdiv">
-
         <div class="form">
             <form id="registerForm" class="student-form">
+                 <h2 style="color: white;font-weight: bold; text-align: center;">Register Here!</h2>
                 <!-- Student Name -->
                     <div class="form-group">
-                        <label for="name">
-                            <img src="userlogo3.jpg" style="width: 20px;">
-                            Student Name
+                        <label for="name" style="color:white;font-weight: bold;">
+                            <img src="userlogo3.jpg" style="width: 20px;padding: 2px">
+                            STUDENT NAME
                         </label>
                         <input type="text" id="name" name="name" required placeholder="Enter student's full name">
                     </div>
-
                     <!-- Roll number -->
                     <div class="form-group">
-                        <label for="roll" style="color: black;font-weight: bold;">
-                            <img src="badge.jpeg" style="width: 20px;">
-                             STUDENT'S ROLL NUMBER
+                        <label for="roll" style="color:white;font-weight: bold; padding: 2px;">
+                            <img src="badge2.jpeg" style="width: 20px;padding: 2px">
+                            ROLL NUMBER
                         </label>
-                        <input type="text" id="roll" name="roll" required placeholder="Enter student's roll number">
-                    </div>
-
-
-
+                        <input type="text" id="rollNumber" name="roll" required placeholder="Enter student's roll number">
+                    </div>
                     <!-- Room Number -->
                     <div class="form-group">
-                        <label for="roomNumber">
-                            <img src="home.png" style="width: 20px;padding:6px;">
-                            Room Number
+                        <label for="roomNumber" style="color:white;font-weight: bold; padding: 2px;">
+                            <img src="homelogo2.jpeg" style="width: 20px;padding: 2px">
+                            ROOM NUMBER
                         </label>
                         <input type="text" id="roomNumber" name="roomNumber" required placeholder="e.g., 101,102">
                     </div>
-
                     <!-- Phone Number -->
                     <div class="form-group">
-                        <label for="phoneNumber">
-                            <img src="phonelogo.jpg" style="width: 20px;padding:6px;">
-                              Phone Number
+                        <label for="phoneNumber" style="color:white;font-weight: bold; padding: 2px;">
+                            <img src="phonelogo.jpg" style="width: 20px;padding: 2px">
+                              PHONE NUMBER
                         </label>
                         <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter student's phone number">
                     </div>
-
                     <!-- Email -->
                     <div class="form-group">
-                        <label for="email">
-                            <img src="msglogo.jpg" style="width: 20px;padding:6px;">
-                              Email Address
+                        <label for="email" style="color:white;font-weight: bold">
+                            <img src="msglogo.jpg" style="width: 20px; padding: 2px">
+                            EMAIL ADDRESS
                         </label>
                         <input type="email" id="email" name="email" required placeholder="e.g.,bca150xx.23@bitmesra.ac.in">
                     </div>
-
                     <!-- Guardian Contact -->
                     <div class="form-group">
-                        <label for="guardianContact">
-                            <img src="twouserlogo.jpg" style="width: 20px; padding:6px;">
-                              Guardian Contact Number
+                        <label for="guardianContact" style="color:white;font-weight: bold;;">
+                            <img src="twouserlogo.jpg" style="width: 20px; padding:2px;">
+                            GUARDIAN CONTACT NUMBER
                         </label>
                         <input type="tel" id="guardianContact" name="guardianContact" required placeholder="Enter guardian's phone number">
                     </div>
                     <br>
                     <!-- Submit Button -->
                     <button type="submit" class="submit-button">
-                        
                          Register Student
                     </button>
-                </form>
-
-                
+                </form>    
         </div>
     </div>
 <script>
-    
     document.getElementById("registerForm").addEventListener("submit", function(e){
-        e.preventDefault(); // stop page refresh
-        
+        e.preventDefault(); // stop page refresh  
     // Read input values
     let now = new Date();
     let t = now.toLocaleTimeString();
     let student = {
         name: document.getElementById("name").value,
-        rollNumber: document.getElementById("roll").value,
+        rollNumber: document.getElementById("rollNumber").value,
         roomNumber: document.getElementById("roomNumber").value,
         phoneNumber: document.getElementById("phoneNumber").value,
         email: document.getElementById("email").value,
         guardianContact: document.getElementById("guardianContact").value,
 
     };
-
     // Get existing students from LocalStorage or empty array
     let students = JSON.parse(localStorage.getItem("students")) || [];
-
     // Add new student
     students.push(student);
-
-    // Save back to LocalStorage
+   // Save back to LocalStorage
     localStorage.setItem("students", JSON.stringify(students));
-
     alert("Student Registered Successfully!");
-
     // Redirect to Registered Student Page
     window.location.href = "studentpage.html";
-
     console.log(students[students.length-1].name);
 });
 

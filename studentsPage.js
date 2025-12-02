@@ -34,7 +34,7 @@ students.forEach(student => {
 
       <div class="card-actions">
         <button class="btn-inactive btn-out" style="background-color:#519ccb">Mark Out</button>
-        <button class="btn-inactive btn-in style="background-color:gray">Mark In</button>
+        <button class="btn-inactive btn-in" style="background-color:gray">Mark In</button>
       </div>
     </div>
 
@@ -50,35 +50,27 @@ students.forEach(student => {
 
   cardContainer.appendChild(card);
 
-  // Select buttons
   const btnOut = card.querySelector(".btn-out");
   const btnIn  = card.querySelector(".btn-in");
 
   const activityList = card.querySelector(".activity-list");
-
-  // ----------------------------------------------------
-  // DEFAULT BUTTON STATE (student starts "IN")
-  // ----------------------------------------------------
-  if(student.activities.length == 0 || student.activities.at(-1).type == "In")
+  const last= student.activities.at(-1);
+  if(!last || last.type==="In")
   {
     btnIn.disabled = true;      // Can't mark IN again
     btnOut.disabled = false;    // Can mark OUT first
+  }else{
+    btnIn.disabled=false;
+    btnOut.disabled=true;
   }
-  
 
-  // ----------------------------------------------------
-
-  // FUNCTION TO RENDER LATEST 3 ACTIVITIES
   function renderActivities() {
-    activityList.innerHTML = ""; // clear old items
-
-    // Get latest 3 (reverse chronological)
-    const lastThree = student.activities.slice(-3).reverse();
-
+    activityList.innerHTML = ""; 
+   
+    const lastThree = student.activities.slice(-3).reverse();   // mark out, mark in; 
     lastThree.forEach(act => {
       const item = document.createElement("div");
       item.classList.add("activity-item");
-
       item.innerHTML = `
         <div class="activity-icon ${act.type === 'In' ? 'in' : 'out'}">⮕</div>
         <div class="activity-text">
@@ -86,34 +78,23 @@ students.forEach(student => {
           <div class="activity-time">${act.time}</div>
         </div>
       `;
-
-      activityList.appendChild(item); // appending item div inside activity list div
+       activityList.appendChild(item); // appending item div inside activity list div
     });
   }
-
   // FIRST RENDER (if the student already has old data)
   renderActivities();
-
-  // ---- MARK OUT ----
   btnOut.addEventListener("click", () => {
-
-    // ❗ Disable OUT button & enable IN button
-    
+  // ❗ Disable OUT button & enable IN button 
       btnOut.disabled = true;
       btnIn.disabled = false;
-    student.activities.push({
+      student.activities.push({
       type: "Out",
       time: getFormattedTime()
     });
-  
-
     renderActivities();
     localStorage.setItem("students", JSON.stringify(students));
-  });
-
-  // ---- MARK IN ----
+    });
   btnIn.addEventListener("click", () => {
-
     // ❗ Disable IN button & enable OUT button
       btnIn.disabled = true;
       btnOut.disabled = false;
@@ -121,19 +102,14 @@ students.forEach(student => {
       type: "In",
       time: getFormattedTime()
     });
-
     renderActivities();
     localStorage.setItem("students", JSON.stringify(students));
   });
-
-
 });
-
 function reset(){
   localStorage.clear();
   location.reload();
 }
-
 function searchItems(){
   const input=(document.getElementById("search")?.value || "").trim().toLowerCase();
   const cards=document.querySelectorAll("#cardContainer .card");
@@ -143,6 +119,6 @@ function searchItems(){
        card.style.display="";
       }else{
         card.style.display="none";
-      }
-  });
+      }
+   });
 }
